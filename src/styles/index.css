@@ -1,3 +1,28 @@
 /* 
     General Styles
 */
+
+.my-card {
+    border: 1px solid gray;
+    min-width: 300px;
+    margin-right: 5px;
+}
+
+.my-card > div > img {
+    width: 100%;
+}
+
+.body-text, .boton-abajo {
+    padding: 15px;
+}
+
+.boton-abajo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-carousel {
+    display: flex;
+    overflow-x: scroll;
+}
+
