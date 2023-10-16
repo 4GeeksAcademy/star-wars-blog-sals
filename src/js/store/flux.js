@@ -3,6 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			characters: [],
 			planets: [],
+			vehicles: [],
+			favorites: [],
 			urlBase: "https://www.swapi.tech/api",
 			demo: [
 				{
@@ -41,46 +43,76 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			getCharacters: ()=> {
+			getCharacters: () => {
 				fetch(`${getStore().urlBase}/people`)
-				.then((response) => response.json())
-				.then((data)=> {
-					for (let item of data.results) {
-						fetch(item.url)
-						.then((response)=> response.json())
-						.then((data)=> {
-							setStore({
-								characters: [...getStore().characters, data.result]
-							})
-						}).catch((err)=> {
-							console.log(err)
-						})
+					.then((response) => response.json())
+					.then((data) => {
+						for (let item of data.results) {
+							fetch(item.url)
+								.then((response) => response.json())
+								.then((data) => {
+									setStore({
+										characters: [...getStore().characters, data.result]
+									})
+								}).catch((err) => {
+									console.log(err)
+								})
+						}
 					}
-				}
-				).catch((err)=>{
-					console.log(err)
-				})
+					).catch((err) => {
+						console.log(err)
+					})
 			},
-			getPlanets: ()=> {
+			getPlanets: () => {
 				fetch(`${getStore().urlBase}/planets`)
-				.then((response) => response.json())
-				.then((data)=> {
-					for (let item of data.results) {
-						fetch(item.url)
-						.then((response)=> response.json())
-						.then((data)=> {
-							setStore({
-								planets: [...getStore().planets, data.result]
-							})
-						}).catch((err)=> {
-							console.log(err)
-						})
+					.then((response) => response.json())
+					.then((data) => {
+						for (let item of data.results) {
+							fetch(item.url)
+								.then((response) => response.json())
+								.then((data) => {
+									setStore({
+										planets: [...getStore().planets, data.result]
+									})
+								}).catch((err) => {
+									console.log(err)
+								})
+						}
 					}
-				}
-				).catch((err)=>{
-					console.log(err)
-				})
-			}			
+					).catch((err) => {
+						console.log(err)
+					})
+			},
+			getVehicles: () => {
+				fetch(`${getStore().urlBase}/vehicles`)
+					.then((response) => response.json())
+					.then((data) => {
+						for (let item of data.results) {
+							fetch(item.url)
+								.then((response) => response.json())
+								.then((data) => {
+									setStore({
+										vehicles: [...getStore().vehicles, data.result]
+									})
+								}).catch((err) => {
+									console.log(err)
+								})
+						}
+					}
+					).catch((err) => {
+						console.log(err)
+					})
+			},
+			addFavorite: (item) => {
+				const store = getStore()
+				setStore({ favorites: [...store.favorites, item] })
+			},
+			deleteFavorite: (nombre) => {
+				const store = getStore()
+				setStore({
+					favorites: store.favorites.filter(favorite => favorite != nombre)
+				});
+			}
 		}
 	};
 };

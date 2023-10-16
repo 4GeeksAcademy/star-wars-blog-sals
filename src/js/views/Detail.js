@@ -3,93 +3,18 @@ import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
-const params = useParams();
-const { store } = useContext(Context);
-const [details, setDetails] = useState(null);
+    const params = useParams();
+    const { store } = useContext(Context);
+    const [characterDetails, setCharacterDetails] = useState(null);
 
-const getDetails = () => {
-    switch (params.type) {
-    case "character":
-        const character = store.characters.find((item) => item.uid === params.id);
-        setDetails(character.properties);
-        break;
-    case "vehicle":
-        const vehicle = store.vehicles.find((item) => item.uid === params.id);
-        setDetails(vehicle.properties);
-        break;
-    case "planet":
-        const planet = store.planets.find((item) => item.uid === params.id);
-        setDetails(planet.properties);
-        break;
-    default:
-        break;
-    }
-};
+    const getCharacterDetails = () => {
+        const character = store.characters.find((item) => item.uid == params.id);
+        setCharacterDetails(character.properties);
+    };
 
-useEffect(() => {
-    getDetails();
-}, [params.id, params.type]);
-
-if(params.type == "characters") {
-    
-}
-
-return (
-    <>
-    {details && (
-        <div className="jumbotron mt-5 pt-5">
-        <div className="d-flex justify-content-center">
-            <img
-            className="rounded"
-            src={`https://starwars-visualguide.com/assets/img/${params.type}/${params.id}.jpg`}
-            alt={details.name}
-            />
-        </div>
-        <br />
-        <div className="d-flex flex-column justify-content-center align-items-center">
-            <h3 className="display-5">{details.name}</h3>
-            <hr className="my-4" />
-
-            <Link to="/">
-            <span className="btn btn-primary btn-lg" href="#" role="button">
-                Back home
-            </span>
-            </Link>
-        </div>
-        </div>
-    )}
-    </>
-);
-};
-
-export default Detail
-
-
-
-
-
-
-
-
-
-
-// import React, { useContext, useEffect, useState } from "react";
-// import { Context } from "../store/appContext";
-// import { Link, useParams } from "react-router-dom";
-
-// const Detail = () => {
-//     const params = useParams();
-//     const { store } = useContext(Context);
-//     const [characterDetails, setCharacterDetails] = useState(null);
-
-//     const getCharacterDetails = () => {
-//         const character = store.characters.find((item) => item.uid == params.id);
-//         setCharacterDetails(character.properties);
-//     };
-
-//     useEffect(() => {
-//         getCharacterDetails();
-//     }, [params.id]);
+    useEffect(() => {
+        getCharacterDetails();
+    }, []);
 
     return (
         <>
@@ -128,7 +53,7 @@ export default Detail
 };
 
 
-// export default Detail;
+export default Detail;
 
 // const Detail = () => {
 //   const params = useParams();
