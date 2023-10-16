@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export const Home = () => {
 
@@ -28,7 +30,7 @@ export const Home = () => {
 							<Link to= {`/characters/${item.uid}`}  className="btn btn-outline-primary">Learn More</Link>
 							<button className="btn btn-outline-warning" onClick={()=> {
 								actions.addFavorite(item.properties.name)
-							}}>C</button>
+							}}><FontAwesomeIcon icon={faHeart} /></button>
 						</div>
 					</div>
 						)
@@ -53,7 +55,7 @@ export const Home = () => {
 							<Link to= {`/planets/${item.uid}`}  className="btn btn-outline-primary">Learn More</Link>
 							<button className="btn btn-outline-warning" onClick={()=> {
 								actions.addFavorite(item.properties.name)
-							}}>C</button>
+							}}><FontAwesomeIcon icon={faHeart} /></button>
 						</div>
 					</div>
 						)
@@ -78,7 +80,7 @@ export const Home = () => {
 							<Link to= {`/vehicles/${item.uid}`}  className="btn btn-outline-primary">Learn More</Link>
 							<button className="btn btn-outline-warning" onClick={()=> {
 								actions.addFavorite(item.properties.name)
-							}}>C</button>
+							}}><FontAwesomeIcon icon={faHeart} /></button>
 						</div>
 					</div>
 						)
