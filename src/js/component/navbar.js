@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 export const Navbar = () => {
+	const{ store, actions }= useContext(Context);
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<div className="container">
@@ -11,13 +16,17 @@ export const Navbar = () => {
 				<div className="ml-auto">
 					<div className="dropdown">
 						<a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Favorites 0
+							Favorites {store.favorites.length}
 						</a>
 
 						<ul class="dropdown-menu">
-							<li><a className="dropdown-item" href="#">Action</a></li>
-							<li><a className="dropdown-item" href="#">Another action</a></li>
-							<li><a className="dropdown-item" href="#">Something else here</a></li>
+						{store.favorites.map((item) => {
+						return(
+							<li><a className="dropdown-item" href="#">{item}</a><button onClick={()=> {
+								actions.deleteFavorite(item)
+							}}><FontAwesomeIcon icon={faTrash} /></button></li>
+						)
+					})}
 						</ul>
 					</div>
 				</div>
