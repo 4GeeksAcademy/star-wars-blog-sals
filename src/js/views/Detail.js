@@ -135,4 +135,6 @@ const Detail = () => {
 };
 }
 
-export default Detail;
+// hola
+
+export default Detail
